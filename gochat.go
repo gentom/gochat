@@ -1,4 +1,4 @@
-package gochat
+package main
 
 import (
 	"log"
