@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -22,6 +23,8 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var addr = flag.String("addr", ":8080", "The address of the app")
+	flag.Parse()
 	r := newRoom()
 	http.Handle("/", &templateHandler{filename: "gochat.html"})
 	http.Handle("/room", r)
@@ -44,7 +47,13 @@ func main() {
 	*/
 
 	//Starting the Web-Server
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	log.Println("Starting the Web-Server:D Port: ", *addr)
+	if err := http.ListenAndServe(*addr, nil); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
+	/*
+		if err := http.ListenAndServe(":8080", nil); err != nil {
+			log.Fatal("ListenAndServe:", err)
+		}
+	*/
 }
