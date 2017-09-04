@@ -27,7 +27,6 @@ func (r *room) run() {
 	for {
 		select {
 		case client := <-r.join:
-			//join
 			r.clients[client] = true
 		case client := <-r.leave:
 			//leave
