@@ -29,7 +29,6 @@ func (r *room) run() {
 		case client := <-r.join:
 			r.clients[client] = true
 		case client := <-r.leave:
-			//leave
 			delete(r.clients, client)
 			close(client.send)
 		case msg := <-r.forward:
