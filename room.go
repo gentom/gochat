@@ -17,6 +17,18 @@ func (r *room) run() {
 			//leave
 			delete(r.clients, client)
 			close(client.send)
+		case msg := <-r.forward:
+			// forwarding the message to all clients
+			for client := range r.clients {
+				select {
+				case client.send <- msg:
+					//send a message
+				default:
+					//fail to send
+					delete(r.clients, client)
+					close(client.send)
+				}
+			}
 		}
 	}
 }
