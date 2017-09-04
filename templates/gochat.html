@@ -2,8 +2,17 @@
 <html>
     <head>
         <title>gochat</title>
+        <style>
+            input {display: block;}
+            ul {list-style: none;}
+        </style>
     </head>
     <body>
-        Let's do chat!!:D
+        <ul id="messages"></ul>
+        gochat
+        <form id="chatbox">
+            <textarea placeholder="message"></textarea>
+            <input type="submit" value="Send" />
+        </form>
     </body>
 </html>
